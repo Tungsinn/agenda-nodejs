@@ -4,7 +4,11 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.CONNECTIONSTRING, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.CONNECTIONSTRING, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    useFindAndModify: false
+    })
     .then(() => {
         // A conexão só vai ocorrer quando o app emitir o sinal 'pronto'
         console.log('Conectei à base de dados');
