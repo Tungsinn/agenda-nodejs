@@ -4,9 +4,12 @@ const bcryptjs = require('bcryptjs');
 
 const LoginSchema = new mongoose.Schema({
     nome: { type: String, required: true },
+    sobrenome: {type: String, required: true},
     email: { type: String, required: true },
-    password: { type: String, required: true }
-});
+    password: { type: String, required: true },
+},
+    { collection: 'users'}
+);
 
 const LoginModel = mongoose.model('Login', LoginSchema);
 
@@ -25,13 +28,13 @@ class Login {
         this.user = await LoginModel.findOne({ email: this.body.email });
 
         if(!this.user) {
-            this.errors.push('Usuário já existe.');
+            this.errors.push('Usuário não existe. Cadastre-se para usar a agenda.');
             return;
         } 
 
         // Compara a senha enviada com o hash na BD
         if(!bcryptjs.compareSync(this.body.password, this.user.password)) {
-            this.errors.push('Senha inválida.');
+            this.errors.push('Senha incorreta.');
             this.user = null;
             return;
         }
@@ -76,6 +79,7 @@ class Login {
 
         this.body = {
             nome: this.body.nome,
+            sobrenome: this.body.sobrenome,
             email: this.body.email,
             password: this.body.password
         }
