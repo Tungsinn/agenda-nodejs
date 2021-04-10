@@ -8,15 +8,15 @@
             <div class="col-lg-8 my-3">
                 <h1 class="text-center">Criar conta ou Entrar</h1>
                 <p class="text-center lead">Crie sua conta ou faça o login abaixo</p>
-
+                <div class="form-messages"></div>
                 <%- include('includes/messages') %>
 
                 <div class="row">
-                    <div class="col-lg">
+                    <div class="col-lg my-5">
                         <h4>Cadastre-se</h4>
                         <p>Preencha com seu e-mail e senha.</p>
 
-                        <form action="/login/register" method="POST">
+                        <form class="form-cadastro" action="/login/register" method="POST">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             <div class="form-group">
                                 <label>Nome</label>
@@ -31,18 +31,18 @@
                             <div class="form-group">
                                 <label>Senha</label>
                                 <input type="password" class="form-control" name="password">
-                                <small id="passwordHelp" class="form-text text-muted">A senha deve conter no mínimo 6 caracteres.</small>
+                                <small id="passwordHelp" class="form-text text-muted">A senha deve conter entre 6 e 20 caracteres.</small>
                               </div>
 
                             <button type="submit" class="btn btn-primary">Criar conta</button>
                           </form>
                     </div>
 
-                    <div class="col-lg">
+                    <div class="col-lg my-5">
                         <h4>Faça login</h4>
                         <p>Já tem uma conta? Faça login!</p>
 
-                        <form action="/login/login" method="POST">
+                        <form class="form-login" action="/login/login" method="POST">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             <div class="form-group">
                               <label>E-mail</label>
